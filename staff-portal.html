@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal | Escape Land</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:"DM Sans",sans-serif;background:#eef3f1;color:#103f47}.portal-nav{height:76px;background:white;border-bottom:1px solid #dde6e3;display:flex;align-items:center;padding:0 max(24px,calc((100vw - 1132px)/2))}.portal-nav img{width:150px;height:58px;object-fit:contain}.portal-nav .spacer{margin-left:auto}.portal-nav a{color:#103f47;font-size:12px;font-weight:800;text-decoration:none;margin-right:18px}.avatar-admin{width:36px;height:36px;border-radius:50%;background:#103f47;color:white;display:grid;place-items:center;font-size:11px;font-weight:800}
+    main{max-width:1132px;margin:auto;padding:46px 24px}.portal-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}.portal-heading .eyebrow{font-size:10px;letter-spacing:2px;font-weight:800;color:#d18a1b}.portal-heading h1{font-family:"Manrope";font-size:36px;margin:6px 0 0}.status{background:white;border:1px solid #dbe5e2;border-radius:20px;padding:9px 12px;font-size:11px;font-weight:800}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#36a869;margin-right:6px}
+    .portal-tabs{background:white;border-radius:8px 8px 0 0;display:flex;border-bottom:1px solid #e2e8e6;padding:0 18px}.portal-tab{height:54px;border:0;border-bottom:3px solid transparent;background:transparent;color:#788987;font-weight:800;padding:0 16px}.portal-tab.active{color:#103f47;border-bottom-color:#f5a11a}.portal-view{display:none;background:white;border-radius:0 0 8px 8px;padding:24px;min-height:300px}.portal-view.active{display:block}
+    #gate.active{display:grid;grid-template-columns:300px 1fr;gap:24px}.scanner-panel{min-height:210px;border-radius:8px;background:linear-gradient(135deg,#103f47,#082f35);color:white;padding:24px;display:flex;flex-direction:column;justify-content:space-between}.scanner-panel .eyebrow{font-size:10px;letter-spacing:2px;color:#ffc75a}.scanner-panel h2{font-family:"Manrope";margin:0}.scanner-icon{width:70px;height:70px;border:2px solid rgba(255,255,255,.35);border-radius:10px}.scanner-form{align-self:center}.scanner-form label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:#71817f;margin-bottom:8px}.scanner-form>div{display:flex;height:50px}.scanner-form input{flex:1;min-width:0;border:1px solid #dfe6e4;border-right:0;border-radius:6px 0 0 6px;padding:0 13px;text-transform:uppercase}.scanner-form button{width:100px;border:0;border-radius:0 6px 6px 0;background:#f5a11a;color:#082f35;font-weight:800}.scanner-form small{display:block;color:#899592;margin-top:8px}.validation-result{display:none;margin-top:14px;padding:14px;border-radius:7px;font-weight:800}.validation-result.success{display:block;background:#edf7f1;color:#28764b}.validation-result.error{display:block;background:#fff1ed;color:#a43b27}
+    .schedule-toolbar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}.schedule-toolbar .eyebrow{font-size:10px;letter-spacing:2px;color:#d18a1b}.schedule-toolbar h2{font-family:"Manrope";margin:4px 0}.schedule-wrap{overflow-x:auto}.schedule-table{width:100%;min-width:800px;border-collapse:separate;border-spacing:5px}.schedule-table th{font-size:10px;color:#7a8987;text-transform:uppercase;padding:8px}.schedule-table td:first-child{font-weight:800}.schedule-table td{border-radius:5px;text-align:center;font-size:11px;height:48px}.available{background:#edf7f1;color:#377d57}.booked{background:#fff1df;color:#9a6818}.maintenance{background:#edf0f2;color:#718087}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}.metric-grid article{border:1px solid #e3e8e6;border-radius:8px;padding:18px;display:grid;gap:6px}.metric-grid p{margin:0;color:#7b8987;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800}.metric-grid strong{font-family:"Manrope";font-size:28px}.metric-grid small{color:#358158}.analytics-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:12px}.chart-card{border:1px solid #e3e8e6;border-radius:8px;padding:18px}.chart-card h2{font-size:15px;margin:0 0 16px}.bar-chart{display:grid;gap:12px}.bar-chart div{display:grid;grid-template-columns:90px 1fr 70px;gap:8px;align-items:center;font-size:11px;color:#71817f}.bar-chart i{height:20px;border-radius:3px;background:#e6ecea;position:relative;overflow:hidden}.bar-chart i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--bar);background:#f5a11a}.bar-chart b{text-align:right}.campaign-table{width:100%;border-collapse:collapse;font-size:12px}.campaign-table th{text-align:left;color:#869390;padding:8px;border-bottom:1px solid #edf1ef}.campaign-table td{padding:9px 8px;border-bottom:1px solid #edf1ef}.platform-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
+    @media(max-width:800px){.portal-heading{align-items:flex-start;flex-direction:column;gap:12px}.portal-tabs{overflow-x:auto}.portal-tab{white-space:nowrap}#gate.active{grid-template-columns:1fr}.metric-grid,.analytics-grid{grid-template-columns:1fr}.portal-nav a{display:none}}
+  </style>
+</head>
+<body>
+  <header class="portal-nav">
+    <a href="index.html"><img src="logo.jpg" alt="HorizonCore Systems"></a>
+    <div class="spacer"></div>
+    <a href="index.html">View guest website</a>
+    <span class="avatar-admin">AM</span>
+  </header>
+  <main>
+    <div class="portal-heading">
+      <div><p class="eyebrow">HORIZONCORE OPERATIONS</p><h1>Escape Land Staff Portal</h1></div>
+      <span class="status"><i></i>Systems operational</span>
+    </div>
+    <div class="portal-tabs">
+      <button class="portal-tab active" data-portal="gate">Gate Check-In</button>
+      <button class="portal-tab" data-portal="rooms">Room Schedule</button>
+      <button class="portal-tab" data-portal="revenue">Revenue & Campaigns</button>
+    </div>
+    <section class="portal-view active" id="gate">
+      <div class="scanner-panel"><div class="scanner-icon"></div><div><p class="eyebrow">DIGITAL ENTRY VALIDATION</p><h2>Gate Check-In Scanner</h2></div></div>
+      <div class="scanner-form"><label>Booking ID / E-Ticket</label><div><input id="bookingCode" placeholder="EL-XXXX-XXXX"><button id="validateTicket">Validate</button></div><small>Try EL-2026-1001, EL-2026-1002 or a paid demo ticket</small><div class="validation-result" id="validationResult"></div></div>
+    </section>
+    <section class="portal-view" id="rooms">
+      <div class="schedule-toolbar"><div><p class="eyebrow">21—27 NOVEMBER 2026</p><h2>Resort Room Schedule</h2></div></div>
+      <div class="schedule-wrap"><table class="schedule-table"><thead><tr><th>Room</th><th>Sat 21</th><th>Sun 22</th><th>Mon 23</th><th>Tue 24</th><th>Wed 25</th><th>Thu 26</th><th>Fri 27</th></tr></thead><tbody>
+        <tr><td>Garden 101</td><td class="booked">Booked</td><td class="booked">Booked</td><td class="available">Available</td><td class="available">Available</td><td class="booked">Booked</td><td class="booked">Booked</td><td class="available">Available</td></tr>
+        <tr><td>Safari 204</td><td class="available">Available</td><td class="available">Available</td><td class="booked">Booked</td><td class="booked">Booked</td><td class="booked">Booked</td><td class="available">Available</td><td class="available">Available</td></tr>
+        <tr><td>Villa 301</td><td class="booked">Booked</td><td class="available">Available</td><td class="available">Available</td><td class="available">Available</td><td class="booked">Booked</td><td class="booked">Booked</td><td class="available">Available</td></tr>
+        <tr><td>Ocean 402</td><td class="available">Available</td><td class="available">Available</td><td class="maintenance">Maintenance</td><td class="maintenance">Maintenance</td><td class="available">Available</td><td class="booked">Booked</td><td class="booked">Booked</td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="portal-view" id="revenue">
+      <div class="metric-grid"><article><p>Monthly revenue</p><strong>RM 184,500</strong><small>↑ 12.8% from October</small></article><article><p>Total bookings</p><strong>1,284</strong><small>326 this week</small></article><article><p>Campaign conversions</p><strong>18.6%</strong><small>↑ 3.2% from October</small></article></div>
+      <div class="analytics-grid"><article class="chart-card"><h2>Revenue by attraction</h2><div class="bar-chart"><div><span>Water Park</span><i style="--bar:78%"></i><b>RM 58k</b></div><div><span>Safari</span><i style="--bar:64%"></i><b>RM 47k</b></div><div><span>Resort</span><i style="--bar:71%"></i><b>RM 52k</b></div><div><span>Combos</span><i style="--bar:88%"></i><b>RM 27k</b></div></div></article>
+      <article class="chart-card"><h2>Social campaign conversions</h2><table class="campaign-table"><thead><tr><th>Platform</th><th>Visits</th><th>Bookings</th><th>Rate</th></tr></thead><tbody><tr><td><b class="platform-dot" style="background:#e68b30"></b>Instagram</td><td>4,820</td><td>924</td><td>19.1%</td></tr><tr><td><b class="platform-dot" style="background:#5a72b5"></b>Facebook</td><td>3,140</td><td>492</td><td>15.7%</td></tr><tr><td><b class="platform-dot" style="background:#173d43"></b>TikTok</td><td>5,260</td><td>1,106</td><td>21.0%</td></tr><tr><td><b class="platform-dot" style="background:#59a66d"></b>Word of Mouth</td><td>1,980</td><td>412</td><td>20.8%</td></tr></tbody></table></article></div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll(".portal-tab").forEach(tab=>tab.addEventListener("click",()=>{
+      document.querySelectorAll(".portal-tab").forEach(item=>item.classList.remove("active"));
+      document.querySelectorAll(".portal-view").forEach(view=>view.classList.remove("active"));
+      tab.classList.add("active");document.getElementById(tab.dataset.portal).classList.add("active");
+    }));
+    document.getElementById("validateTicket").addEventListener("click",()=>{
+      const code=document.getElementById("bookingCode").value.trim().toUpperCase();
+      const paid=JSON.parse(localStorage.getItem("escapeLandPaidTicket")||"{}");
+      const valid=code==="EL-2026-1001"||code==="EL-2026-1002"||(paid.bookingId&&code===paid.bookingId);
+      const result=document.getElementById("validationResult");
+      result.className="validation-result "+(valid?"success":"error");
+      result.innerHTML=valid?"✓ Entry approved — guest checked in successfully":"× Ticket not recognised — check the Booking ID";
+    });
+  </script>
+</body>
+</html>

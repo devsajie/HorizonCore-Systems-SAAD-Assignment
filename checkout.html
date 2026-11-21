@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout | Escape Land</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background:#eef3f1; }
+    .checkout-header { height:76px;background:white;border-bottom:1px solid #dde6e3;display:flex;align-items:center;padding:0 max(24px,calc((100vw - 1080px)/2)); }
+    .checkout-header img { width:150px;height:58px;object-fit:contain;object-position:left; }
+    .secure-label { margin-left:auto;color:#73837f;font-size:12px;font-weight:700 }.secure-label span { color:#36905d;margin-right:6px }
+    .checkout-layout { max-width:1080px;margin:42px auto;padding:0 24px;display:grid;grid-template-columns:1fr 350px;gap:24px }
+    .checkout-card { background:white;border-radius:10px;border:1px solid #dde6e3;padding:28px }
+    .checkout-card h1,.checkout-card h2 { font-family:"Manrope";color:#103f47;margin:0 }.checkout-card h1{font-size:32px}.checkout-card h2{font-size:18px;margin-bottom:16px}
+    .payment-methods { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 }
+    .payment-method { border:1px solid #dce5e2;border-radius:7px;height:58px;background:white;font-weight:800;color:#103f47 }.payment-method.active{border:2px solid #f5a11a;background:#fffaf1}
+    .form-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px }.form-grid label{display:grid;gap:7px;font-size:12px;font-weight:800;color:#103f47}.form-grid label.full{grid-column:1/-1}.form-grid input{height:48px;border:1px solid #dce5e2;border-radius:6px;padding:0 12px;outline:none}
+    .pay-button { width:100%;height:52px;border:0;border-radius:6px;background:#f5a11a;color:#082f35;font-weight:800;margin-top:18px }.pay-button:disabled{opacity:.65}
+    .order-card { background:#103f47;color:white;border-radius:10px;padding:24px;height:max-content }.order-card h2{color:white;font-family:"Manrope";margin:0 0 20px}.order-row{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12);padding:12px 0;font-size:13px}.order-row span{color:#c6d7d4}.order-total{display:flex;justify-content:space-between;align-items:end;margin-top:18px}.order-total strong{font-family:"Manrope";font-size:30px}
+    .ticket-view { display:none }.ticket-view.active{display:block}.checkout-layout.ticket-mode{grid-template-columns:1fr}.ticket-success{text-align:center}.success-icon{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#edf7f1;color:#29915a;font-size:28px}.ticket-success h1{font-size:30px}.ticket-success>p{color:#73837f}
+    .digital-ticket{max-width:650px;margin:24px auto 0;border:1px solid #dce5e2;border-radius:10px;display:grid;grid-template-columns:170px 1fr;background:white;overflow:hidden}.qr-grid-ticket{min-height:170px;background:#103f47;padding:24px;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:2px}.qr-grid-ticket i{background:transparent}.qr-grid-ticket i.on{background:white}.ticket-details{text-align:left;padding:24px}.ticket-details small{color:#8a9895;letter-spacing:1px}.ticket-details h2{margin:6px 0}.ticket-details dl{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ticket-details dt{font-size:10px;color:#879591;text-transform:uppercase}.ticket-details dd{margin:2px 0 0;font-weight:800;color:#103f47}
+    .back-link{display:inline-block;margin-top:18px;color:#103f47;font-weight:800;text-decoration:none}
+    @media(max-width:750px){.checkout-layout{grid-template-columns:1fr}.order-card{order:-1}.payment-methods{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-grid label.full{grid-column:auto}.digital-ticket{grid-template-columns:1fr}.qr-grid-ticket{width:170px;height:170px;margin:20px auto 0;border-radius:6px}}
+  </style>
+</head>
+<body>
+  <header class="checkout-header">
+    <a href="index.html"><img src="logo.jpg" alt="HorizonCore Systems"></a>
+    <div class="secure-label"><span>●</span> Secure demo checkout</div>
+  </header>
+  <main class="checkout-layout" id="checkoutLayout">
+    <section class="checkout-card" id="paymentView">
+      <p class="eyebrow dark">ESCAPE LAND CHECKOUT</p>
+      <h1>Complete your booking</h1>
+      <div class="payment-methods">
+        <button class="payment-method active" type="button">Card</button>
+        <button class="payment-method" type="button">FPX</button>
+        <button class="payment-method" type="button">E-Wallet</button>
+      </div>
+      <form id="paymentForm">
+        <div class="form-grid">
+          <label class="full">Name on card<input type="text" value="Demo Guest" required></label>
+          <label class="full">Card number<input inputmode="numeric" value="4242 4242 4242 4242" maxlength="19" required></label>
+          <label>Expiry<input value="12/29" maxlength="5" required></label>
+          <label>CVV<input inputmode="numeric" value="123" maxlength="3" required></label>
+        </div>
+        <button class="pay-button" id="payButton" type="submit">Pay RM <span id="payAmount">288</span></button>
+      </form>
+    </section>
+    <aside class="order-card" id="orderSummary">
+      <h2>Booking summary</h2>
+      <div class="order-row"><span>Experience</span><strong id="summaryExperience">Adventure Combo</strong></div>
+      <div class="order-row"><span>Date</span><strong id="summaryDate">—</strong></div>
+      <div class="order-row"><span>Guests</span><strong id="summaryGuests">—</strong></div>
+      <div class="order-row"><span>Campaign source</span><strong id="summarySource">—</strong></div>
+      <div class="order-total"><span>Total</span><strong id="summaryTotal">RM 288</strong></div>
+    </aside>
+    <section class="ticket-view" id="ticketView">
+      <div class="ticket-success">
+        <div class="success-icon">✓</div>
+        <p class="eyebrow dark">PAYMENT COMPLETE</p>
+        <h1>Your Escape is confirmed</h1>
+        <p>Save this digital ticket and present it at the main gate.</p>
+        <div class="digital-ticket">
+          <div class="qr-grid-ticket" id="checkoutQR"></div>
+          <div class="ticket-details">
+            <small>DIGITAL E-TICKET</small>
+            <h2 id="confirmedExperience">Adventure Combo</h2>
+            <dl>
+              <div><dt>Booking ID</dt><dd id="confirmedId">EL-2026-0000</dd></div>
+              <div><dt>Visit date</dt><dd id="confirmedDate">—</dd></div>
+              <div><dt>Guests</dt><dd id="confirmedGuests">—</dd></div>
+              <div><dt>Amount paid</dt><dd id="confirmedTotal">RM 288</dd></div>
+            </dl>
+          </div>
+        </div>
+        <a class="back-link" href="index.html">← Back to Escape Land</a>
+      </div>
+    </section>
+  </main>
+  <script>
+    const data = JSON.parse(localStorage.getItem("escapeLandCheckout") || "{}");
+    const price = Number(data.price || 288);
+    const code = data.bookingId || ("EL-" + new Date().getFullYear() + "-" + String(Math.floor(1000 + Math.random() * 9000)));
+    document.getElementById("payAmount").textContent = price;
+    document.getElementById("summaryExperience").textContent = data.experience || "Adventure Combo";
+    document.getElementById("summaryDate").textContent = data.date || "—";
+    document.getElementById("summaryGuests").textContent = data.guests || "—";
+    document.getElementById("summarySource").textContent = data.source || "—";
+    document.getElementById("summaryTotal").textContent = "RM " + price;
+    document.querySelectorAll(".payment-method").forEach(button => button.addEventListener("click", () => {
+      document.querySelectorAll(".payment-method").forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+    }));
+    function makeQR(containerId, code) {
+      const grid = document.getElementById(containerId);
+      for(let i=0;i<121;i++){
+        const dot=document.createElement("i");
+        const row=Math.floor(i/11),col=i%11;
+        const finder=(row<3&&col<3)||(row<3&&col>7)||(row>7&&col<3);
+        const hole=(row===1&&col===1)||(row===1&&col===9)||(row===9&&col===1);
+        const seed=(i*17+code.charCodeAt(i%code.length))%29;
+        if(finder&&!hole)dot.className="on";else if(!finder&&seed<13)dot.className="on";
+        grid.appendChild(dot);
+      }
+    }
+    document.getElementById("paymentForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const button=document.getElementById("payButton");
+      button.disabled=true;
+      button.textContent="Processing payment...";
+      setTimeout(()=>{
+        document.getElementById("paymentView").style.display="none";
+        document.getElementById("orderSummary").style.display="none";
+        document.getElementById("checkoutLayout").classList.add("ticket-mode");
+        document.getElementById("ticketView").classList.add("active");
+        document.getElementById("confirmedExperience").textContent=data.experience||"Adventure Combo";
+        document.getElementById("confirmedId").textContent=code;
+        document.getElementById("confirmedDate").textContent=data.date||"—";
+        document.getElementById("confirmedGuests").textContent=data.guests||"—";
+        document.getElementById("confirmedTotal").textContent="RM "+price;
+        makeQR("checkoutQR",code);
+        localStorage.setItem("escapeLandPaidTicket",JSON.stringify({...data,bookingId:code,paid:true}));
+      },900);
+    });
+  </script>
+</body>
+</html>

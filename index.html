@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape Land | HorizonCore Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement">
+    <p><span>Early Bird</span> Save 20% on Adventure Combo passes this weekend</p>
+    <button type="button" aria-label="Close announcement" id="closeAnnouncement">&times;</button>
+  </div>
+
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a class="brand" href="#" aria-label="Escape Land home">
+        <img src="logo.jpg" alt="HorizonCore Systems">
+      </a>
+      <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a class="active" href="#discover">Discover</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#packages">Packages</a>
+        <a href="#reviews">Reviews</a>
+        <a href="staff-login.html">Staff Portal</a>
+      </div>
+      <button class="account-button" id="accountButton">
+        <span class="account-icon">H</span>
+        <span>My Account</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="discover">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">PENANG'S PREMIER DESTINATION</p>
+        <h1>One place.<br><em>Endless adventure.</em></h1>
+        <p class="hero-copy">Splash, explore and unwind—all in a day or stay a little longer.</p>
+      </div>
+
+      <div class="booking-panel">
+        <div class="booking-tabs" role="tablist">
+          <button class="tab active" data-tab="tickets" role="tab">Tickets</button>
+          <button class="tab" data-tab="stay" role="tab">Stay</button>
+          <button class="tab" data-tab="package" role="tab">Packages</button>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+          <label class="field">
+            <span>Visit date</span>
+            <input type="date" id="visitDate" required>
+          </label>
+          <label class="field stay-field" id="checkOutField" hidden>
+            <span>Check-out</span>
+            <input type="date" id="checkOutDate">
+          </label>
+          <label class="field stay-field" id="roomField" hidden>
+            <span>Room type</span>
+            <select id="roomType">
+              <option>Garden View Room</option>
+              <option>Safari View Suite</option>
+              <option>Family Villa</option>
+              <option>Ocean View Room</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Guests</span>
+            <select id="guestCount">
+              <option>2 Adults, 1 Child</option>
+              <option>1 Adult</option>
+              <option>2 Adults</option>
+              <option>2 Adults, 2 Children</option>
+              <option>Group / 5+ Guests</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Experience</span>
+            <select id="experience">
+              <option>Adventure Combo</option>
+              <option>Water Park</option>
+              <option>Safari Experience</option>
+              <option>Resort Stay</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>How did you hear?</span>
+            <select id="campaignSource">
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>Facebook</option>
+              <option>Word of Mouth</option>
+              <option>Walk-in</option>
+            </select>
+          </label>
+          <button class="search-button" type="submit">
+            <span>Check availability</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="experiences section" id="experiences">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow dark">DISCOVER ESCAPE LAND</p>
+          <h2>Choose your adventure</h2>
+        </div>
+        <div class="slider-buttons">
+          <button id="prevCard" aria-label="Previous experience">←</button>
+          <button id="nextCard" aria-label="Next experience">→</button>
+        </div>
+      </div>
+
+      <div class="experience-grid" id="experienceGrid">
+        <article class="experience-card water">
+          <div class="card-top">
+            <span class="card-number">01</span>
+            <span class="card-badge">Most popular</span>
+          </div>
+          <div class="card-info">
+            <p>COOL DOWN</p>
+            <h3>Water Park</h3>
+            <button data-experience="Water Park">Explore <span>→</span></button>
+          </div>
+        </article>
+
+        <article class="experience-card safari">
+          <div class="card-top">
+            <span class="card-number">02</span>
+          </div>
+          <div class="card-info">
+            <p>MEET 55 SPECIES</p>
+            <h3>Safari</h3>
+            <button data-experience="Safari Experience">Explore <span>→</span></button>
+          </div>
+        </article>
+
+        <article class="experience-card resort">
+          <div class="card-top">
+            <span class="card-number">03</span>
+          </div>
+          <div class="card-info">
+            <p>REST & RECHARGE</p>
+            <h3>The Resort</h3>
+            <button data-experience="Resort Stay">Explore <span>→</span></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="packages section" id="packages">
+      <div class="packages-heading">
+        <div>
+          <p class="eyebrow dark">MORE VALUE, MORE MEMORIES</p>
+          <h2>Bundle & save</h2>
+        </div>
+        <div class="promo-box">
+          <label for="promoCode">Promo code</label>
+          <div>
+            <input type="text" id="promoCode" placeholder="Try ESCAPE20" autocomplete="off">
+            <button id="applyPromo" type="button">Apply</button>
+          </div>
+          <small id="promoMessage">Save 20% on any bundle</small>
+        </div>
+      </div>
+      <div class="package-grid">
+        <article class="bundle-card" data-package="Splash & Safari" data-price="198">
+          <div class="bundle-icon">01</div>
+          <p>WATER PARK + SAFARI</p>
+          <h3>Splash & Safari</h3>
+          <ul><li>All water rides</li><li>55-species safari tour</li><li>Digital e-ticket</li></ul>
+          <div class="bundle-price"><strong data-base-price="198">RM 198</strong><span>/ person</span></div>
+          <button class="bundle-select">Select bundle <span>→</span></button>
+        </article>
+        <article class="bundle-card featured" data-package="Escape Combo" data-price="288">
+          <div class="package-label">BEST VALUE</div>
+          <div class="bundle-icon">02</div>
+          <p>ALL ATTRACTIONS + STAY</p>
+          <h3>Escape Combo</h3>
+          <ul><li>Water park admission</li><li>Guided safari access</li><li>1-night resort stay</li></ul>
+          <div class="bundle-price"><strong data-base-price="288">RM 288</strong><span>/ person</span></div>
+          <button class="bundle-select">Select bundle <span>→</span></button>
+        </article>
+        <article class="bundle-card" data-package="Family Escape" data-price="520">
+          <div class="bundle-icon">03</div>
+          <p>FAMILY BUNDLE</p>
+          <h3>Family Escape</h3>
+          <ul><li>Family of four admission</li><li>Safari guided tour</li><li>Breakfast included</li></ul>
+          <div class="bundle-price"><strong data-base-price="520">RM 520</strong><span>/ package</span></div>
+          <button class="bundle-select">Select bundle <span>→</span></button>
+        </article>
+      </div>
+    </section>
+
+    <section class="reviews section" id="reviews">
+      <div class="review-intro">
+        <p class="eyebrow dark">GUEST STORIES</p>
+        <h2>Good days.<br><em>Great memories.</em></h2>
+        <button class="review-button" id="writeReviewButton">Write a review <span>＋</span></button>
+      </div>
+      <div class="review-list" id="reviewList">
+        <blockquote class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>“The safari and water park made the perfect family day. The new digital tickets made entry fast and effortless.”</p>
+          <footer>
+            <span class="avatar">SL</span>
+            <div><strong>Siti Lee</strong><small>Adventure Combo Guest</small></div>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-close-modal aria-label="Close">×</button>
+      <p class="eyebrow dark">YOUR ESCAPE STARTS HERE</p>
+      <h2 id="modalTitle">Check availability</h2>
+      <p id="modalSummary"></p>
+      <div class="availability" id="availabilityResult"></div>
+      <button class="continue-button" id="continueButton">Continue to booking <span>→</span></button>
+    </div>
+  </div>
+
+  <div class="modal" id="reviewModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-review></div>
+    <div class="modal-card review-modal-card" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+      <button class="modal-close" data-close-review aria-label="Close">×</button>
+      <p class="eyebrow dark">SHARE YOUR EXPERIENCE</p>
+      <h2 id="reviewModalTitle">Write a Review</h2>
+      <form id="reviewForm">
+        <label>Your rating
+          <div class="star-picker" id="starPicker" aria-label="Choose rating">
+            <button type="button" data-rating="1">★</button>
+            <button type="button" data-rating="2">★</button>
+            <button type="button" data-rating="3">★</button>
+            <button type="button" data-rating="4">★</button>
+            <button type="button" data-rating="5">★</button>
+          </div>
+        </label>
+        <label>Experience
+          <select id="reviewCategory">
+            <option>Water Park</option>
+            <option>Safari Experience</option>
+            <option>Resort Stay</option>
+            <option>Adventure Combo</option>
+          </select>
+        </label>
+        <label>Your name
+          <input type="text" id="reviewName" placeholder="Guest name" required>
+        </label>
+        <label>Comment
+          <textarea id="reviewComment" rows="4" placeholder="Tell us about your day..." required></textarea>
+        </label>
+        <button class="continue-button" type="submit">Publish review <span>→</span></button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js?v=20261121"></script>
+</body>
+</html>
